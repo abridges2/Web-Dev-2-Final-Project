@@ -10,7 +10,7 @@
 $query = "SELECT * FROM chefs ORDER BY created_at";
 $statement = $db->prepare($query);
 $statement->execute();
-$row = $statement->fetchAll();
+$rows = $statement->fetchAll();
 
 ?>
 
@@ -30,7 +30,7 @@ $row = $statement->fetchAll();
         <?php foreach ($rows as $row): ?>
             <div>
                 <div>
-                    <h5><?= $row['chef_name'] ?></h5>
+                    <h5><a href="chef_showcase_post.php?id=<?=$row['chef_id'] ?>"><?= $row['chef_name'] ?></a></h5>
                     <p><?= $row['biography'] ?></p>
                     <p>Age: <?= $row['chef_age'] ?></p>
                     <p>Restaurant Name: <?= $row['restaurant_name'] ?></p>
