@@ -109,10 +109,10 @@ $chef_posts = $statement_chef_posts->fetchAll(PDO::FETCH_ASSOC);
     </nav>
 
     <sidebar>
-        <h3>Chef Showcase</h3>
+        <h3><a href="chef_showcase.php">Chef Showcase</a></h3>
         <ul>
-            <?php foreach ($chefPosts as $chefPost): ?>
-                <li><a href="chef_post.php?id=<?= $chefPost['chef_id'] ?>"><?= $chefPost['chef_name'] ?></a></li>
+            <?php foreach ($chef_posts as $chef_post): ?>
+                <li><a href="chef_showcase_post.php?id=<?= $chef_post['chef_id'] ?>"><?= $chef_post['chef_name'] ?></a></li>
             <?php endforeach; ?>
         </ul>
     </sidebar>
