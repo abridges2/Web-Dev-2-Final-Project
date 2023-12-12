@@ -58,6 +58,12 @@ $query = "SELECT * FROM posts ORDER BY $sorting_column $sort_order";
 $statement = $db->prepare($query); 
 $statement->execute();
 
+// Fetch posts from the chefs table with a limit of 5
+$query_chef_posts = "SELECT * FROM chef_showcase ORDER BY created_at DESC LIMIT 5";
+$statement_chef_posts = $db->prepare($query_chef_posts);
+$statement_chef_posts->execute();
+$chef_posts = $statement_chef_posts->fetchAll(PDO::FETCH_ASSOC);
+
 ?>
 
 <!DOCTYPE html>
@@ -101,6 +107,15 @@ $statement->execute();
              <?php endif; ?>
         </ul>
     </nav>
+
+    <sidebar>
+        <h3>Chef Showcase</h3>
+        <ul>
+            <?php foreach ($chefPosts as $chefPost): ?>
+                <li><a href="chef_post.php?id=<?= $chefPost['chef_id'] ?>"><?= $chefPost['chef_name'] ?></a></li>
+            <?php endforeach; ?>
+        </ul>
+    </sidebar>
 
     <!-- Sorting options for the regular blog post view. -->
     <!-- Sending back button selected as a post parameter -->
