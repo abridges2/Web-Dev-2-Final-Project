@@ -4,7 +4,7 @@
     
     Name: Aidan Bridges 
     Date: 2023-09-24
-    Description: Create page for final project wd2.
+    Description: Create page for the final project wd2.
 
 ****************/
 require('connect.php');
@@ -17,7 +17,7 @@ $error_msg = '';
 $query_categories = "SELECT * FROM categories";
 $categories_statement = $db->prepare($query_categories);
 $categories_statement->execute();
-$categories = $categories_statement->fetchall();
+$categories = $categories_statement->fetchAll();
 
 // If the submit button is clicked
 if (isset($_POST['submit'])) 
@@ -59,16 +59,19 @@ if (isset($_POST['submit']))
                 $new_image_path = file_upload_path($image_filename);
 
                 // Move the uploaded image
-                if (file_is_an_image($temporary_image_path, $new_image_path)) {
+                if (file_is_an_image($temporary_image_path, $new_image_path)) 
+                {
                     move_uploaded_file($temporary_image_path, $new_image_path);
 
+                    // Construct the file URL based on your server setup
+                    $file_url = "images/" . $image_filename;
+
                     // Insert image details into the images table
-                    $image_query = "INSERT INTO images (post_id, file_name) VALUES (:post_id, :file_name)";
+                    $image_query = "INSERT INTO images (post_id, file_url) VALUES (:post_id, :file_url)";
                     $image_statement = $db->prepare($image_query);
                     $image_statement->bindValue(':post_id', $last_post_id, PDO::PARAM_INT);
-                    $image_statement->bindValue(':file_name', $image_filename, PDO::PARAM_STR);
+                    $image_statement->bindValue(':file_url', $file_url, PDO::PARAM_STR);
 
-                    
                     if ($image_statement->execute()) 
                     {
                         echo "Image inserted successfully.";
@@ -99,7 +102,7 @@ function file_upload_path($original_filename, $upload_subfolder_name = 'uploads'
     return join(DIRECTORY_SEPARATOR, $path_segments);
 }
 
-//  Function for testing a files image-ness
+// Function for testing a file's image-ness
 function file_is_an_image($temporary_path, $new_path) 
 {
     $allowed_mime_types      = ['image/gif', 'image/jpeg', 'image/png'];
@@ -121,7 +124,7 @@ function file_is_an_image($temporary_path, $new_path)
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Create Post</title>
 </head>
 <body>
     <form action="create.php" method="post" enctype="multipart/form-data">
