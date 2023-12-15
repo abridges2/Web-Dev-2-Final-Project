@@ -30,6 +30,8 @@ $rows = $statement->fetchAll();
         <?php if($_SESSION['user_type'] == 'chef'): ?>
             <h2><a href="sign_up_chef_showcase.php">Be Showcased Here</a></h2>
         <?php endif; ?>
+        <h2><a href="index.php">Home</a></h2>
+        
     </header>
     
     <div>
@@ -39,8 +41,8 @@ $rows = $statement->fetchAll();
                     <h5><a href="chef_showcase_post.php?id=<?=$row['chef_id'] ?>"><?= $row['chef_name'] ?></a></h5>
                     <p><?= $row['biography'] ?></p>
                     <p>Age: <?= $row['chef_age'] ?></p>
-                    <p>Restaurant Name: <?= $row['restaurant_name'] ?></p>
-                    <p>Restaurant Location: <?= $row['restaurant_location'] ?></p>
+                    <p>Restaurant Name: <?= $row['restaraunt_name'] ?></p>
+                    <p>Restaurant Location: <?= $row['restaraunt_location'] ?></p>
                 </div>
             </div>
         <?php endforeach; ?>
