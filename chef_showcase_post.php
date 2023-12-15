@@ -6,6 +6,9 @@
     Description: page for viewing specific posts from the chef_showcase page
 
 ****************/
+
+require('connect.php');
+
 $chef_post_id = FILTER_INPUT(INPUT_GET, 'id', FILTER_VALIDATE_INT);
 
 // Query for retrieving the single post based on the ID from the get parameter.
@@ -16,7 +19,7 @@ $statement = $db->prepare($query);
 $statement->bindValue(":id", $chef_post_id, PDO::PARAM_INT);
 
 // Execute the query.
-$statement->exectue();
+$statement->execute();
 
 // Fetch the single row.
 $row = $statement->fetch();
@@ -37,11 +40,13 @@ if(!$row)
     <title>Document</title>
 </head>
 <body>
+    <h2><a href="index.php">Home</a></h2>
+    <h2><a href="chef_showcase.php">See the showcase!</a></h2>
     <article>
         <h2><?= $row['chef_name'] ?></h2>
         <p>Age: <?= $row['chef_age'] ?></p>
-        <p>Restaurant: <?= $row['restaurant_name'] ?></p>
-        <p>Location: <?= $row['restaurant_location'] ?></p>
+        <p>Restaurant: <?= $row['restaraunt_name'] ?></p>
+        <p>Location: <?= $row['restaraunt_location'] ?></p>
         <p>Biography: <?= $row['biography'] ?></p>
         <p>Created At: <?= $row['created_at'] ?></p>
     </article>
