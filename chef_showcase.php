@@ -7,6 +7,9 @@
 
 ****************/
 
+require('connect.php');
+session_start();
+
 $query = "SELECT * FROM chefs ORDER BY created_at";
 $statement = $db->prepare($query);
 $statement->execute();
@@ -23,7 +26,10 @@ $rows = $statement->fetchAll();
 </head>
 <body>
     <header>
-        <h1>Welcome to the Chef Showcase!</h1>
+    <h1>Welcome to the Chef Showcase!</h1>
+        <?php if($_SESSION['user_type'] == 'chef'): ?>
+            <h2><a href="sign_up_chef_showcase.php">Be Showcased Here</a></h2>
+        <?php endif; ?>
     </header>
     
     <div>
