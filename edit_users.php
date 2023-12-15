@@ -58,6 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $statement->bindParam(':first_name', $first_name);
         $statement->bindParam(':user_id', $user_id);
         $statement->execute();
+        header("Location: users.php");
+        exit;
     } 
     elseif (isset($_POST['delete'])) 
     {
@@ -68,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
         $statement->execute();
 
         // Redirect after deletion
-        header("Location: index.php");
+        header("Location: users.php");
         exit;
     }
 }
@@ -83,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST')
 <body>
     <h2>Edit User</h2>
 
-    <form action="edit_user.php" method="post">
+    <form action="edit_users.php" method="post">
         <input type="hidden" name="user_id" value="<?= $user['user_id'] ?>">
 
         <label for="first_name">First Name:</label>
