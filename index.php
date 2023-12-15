@@ -59,7 +59,7 @@ $statement = $db->prepare($query);
 $statement->execute();
 
 // Fetch posts from the chefs table with a limit of 5
-$query_chef_posts = "SELECT * FROM chef_showcase ORDER BY created_at DESC LIMIT 5";
+$query_chef_posts = "SELECT * FROM chefs ORDER BY created_at DESC LIMIT 5";
 $statement_chef_posts = $db->prepare($query_chef_posts);
 $statement_chef_posts->execute();
 $chef_posts = $statement_chef_posts->fetchAll(PDO::FETCH_ASSOC);
@@ -100,6 +100,7 @@ $chef_posts = $statement_chef_posts->fetchAll(PDO::FETCH_ASSOC);
              <li><a href="index.php">Home</a></li>
              <li><a href="sign_up.php">Sign Up</a></li>
              <li><a href="log_in.php">Log In</a></li>
+             <li><a href="logout.php">Log Out</a></li>
              <li><a href="create.php">Create Post</a></li>
              <li><a href="categories.php">Post Categories</a></li>
              <?php if($_SESSION['user_type'] == "admin"): ?>
