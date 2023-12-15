@@ -6,7 +6,7 @@
     Description: log out page for final project
 
 ****************/
-
+require('connect.php');
 // Start or resume session
 session_start();
 
@@ -17,6 +17,6 @@ $_SESSION = array();
 session_destroy();
 
 // Redirect to the login page or any other page after logout
-header("Location: login.php");
+header("Location: index.php");
 exit();
 ?>
