@@ -44,7 +44,7 @@ $users = $statement->fetchAll();
                     <td><?=$user['email']?></td>
                     <td><?=$user['user_type']?></td>
                     <td><?=$user['created_at']?></td>
-                    <td><a href="edit_user.php?id=<?=$user['user_id']?>">Edit</a></td>
+                    <td><a href="edit_users.php?id=<?=$user['user_id']?>">Edit</a></td>
                 </tr>
                 <?php endforeach ?>
         </tbody>
